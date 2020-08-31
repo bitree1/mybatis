@@ -51,4 +51,20 @@ public class EmpController {
         return  emp;
     }
 
+
+    @RequestMapping("/emp/update")
+    public Emp update(){
+        Emp emp = empService.findById(1);
+        emp.setSal(1400f);
+        empService.update(emp);
+        return  emp;
+    }
+
+    @RequestMapping("/emp/del")
+    public String delete(Integer empno){
+        empService.delete(empno);
+        return  "success";
+    }
+
+
 }

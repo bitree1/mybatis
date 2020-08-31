@@ -37,4 +37,18 @@ public class EmpService {
         empMapper.creates(emp);
     }
 
+
+    //开启事务的方法
+    @Transactional(rollbackFor = Exception.class)
+    public void update(Emp emp){
+        empMapper.updates(emp);
+    }
+
+
+    //开启事务的方法
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Integer empno){
+        empMapper.deletes(empno);
+    }
+
 }

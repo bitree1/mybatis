@@ -28,7 +28,7 @@
         and sal>#{psal}
         </if>
     </select>
-    <!-- selectKey 将id 回填 keyProperty主键名  keyColumn=属性名 -->
+    <!-- selectKey 将id 回填 keyProperty主键名  keyColumn=属性名  LAST_INSERT_ID()mysql内置方法-->
     <insert id="creates" parameterType="com.zoe.mybatis.entity.Emp" useGeneratedKeys="true" keyProperty="empno">
         INSERT INTO "public"."emp"( "comm", "ename", "hiredate", "job", "mgr", "sal", "deptno")
         VALUES (#{comm}, #{ename}, #{hiredate}, #{job}, #{mgr}, #{sal}, #{deptno});
@@ -36,4 +36,12 @@
            SELECT LAST_INSERT_ID()
         </selectKey>-->
     </insert>
+
+    <update id="updates" parameterType="com.zoe.mybatis.entity.Emp" >
+      UPDATE "public"."emp" SET "comm" = #{comm}, "ename" = #{ename}, "hiredate" = #{hiredate}, "job" = #{job}, "mgr" = #{mgr}, "sal" = #{sal}, "deptno" =#{deptno} WHERE "empno" =#{empno};
+    </update>
+
+    <delete id="deletes" parameterType="Integer">
+       delete from emp where empno= #{empno}
+    </delete>
 </mapper>

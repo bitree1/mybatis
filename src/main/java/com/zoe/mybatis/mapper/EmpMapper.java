@@ -17,4 +17,10 @@ public interface EmpMapper {
 
     //新增
     public void creates(Emp emp);
+
+    //编辑
+    public void updates(Emp emp);
+
+    //删除
+    public void deletes(Integer empno);
 }
