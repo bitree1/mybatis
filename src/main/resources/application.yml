@@ -1,0 +1,26 @@
+server:
+  port: 8000
+#datasource
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/scott
+    username: postgres
+    password: postgres
+  #format json
+  jackson:
+    serialization:
+      indent-output: true
+
+#mybatis
+mybatis:
+  config-location: classpath:/mybatis/mybatis-config.xml  #core config file ºËÐÄÅäÖÃÎÄ¼þ
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+#show sql
+logging:
+  level:
+    com:
+      zoe:
+        mybatis:
+          mapper: debug
+

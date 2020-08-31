@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件接口 namespace指向接口-->
+<mapper namespace="com.zoe.mybatis.mapper.EmpMapper">
+    <!-- id 指向方法名要一致-->
+    <select id="findById" parameterType="Integer" resultType="com.zoe.mybatis.entity.Emp">
+        select * from emp where empno = #{value}
+    </select>
+
+
+    <!-- resultType="java.util.Map"
+    将查询到的每一条记录保存成键值对的形式 key字段名 value值
+    利用map有很好的可扩展性
+     LinkedHashMap 按数据插入顺序返回
+    -->
+    <select id="findDepts"  resultType="java.util.LinkedHashMap">
+        select * from emp e ,dept d where e.deptno = d.deptno and dname ='sal' and sal>1000
+    </select>
+
+    <select id="findByDepts"   parameterType="java.util.Map" resultType="java.util.LinkedHashMap">
+        select * from emp e ,dept d where e.deptno = d.deptno
+        <if test="pdname!=null">
+            and   dname =#{pdname}
+        </if>
+        <if test="psal!=null">
+        and sal>#{psal}
+        </if>
+    </select>
+    <!-- selectKey 将id 回填 keyProperty主键名  keyColumn=属性名 -->
+    <insert id="creates" parameterType="com.zoe.mybatis.entity.Emp" useGeneratedKeys="true" keyProperty="empno">
+        INSERT INTO "public"."emp"( "comm", "ename", "hiredate", "job", "mgr", "sal", "deptno")
+        VALUES (#{comm}, #{ename}, #{hiredate}, #{job}, #{mgr}, #{sal}, #{deptno});
+      <!--  <selectKey keyProperty="empno" keyColumn="empno" resultType="Integer"  order="AFTER">
+           SELECT LAST_INSERT_ID()
+        </selectKey>-->
+    </insert>
+</mapper>
